@@ -1,0 +1,6 @@
+$:.unshift "../lib"
+require "sc"
+
+task :build do
+  Sc.build
+end
