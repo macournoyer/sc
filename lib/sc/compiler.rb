@@ -21,6 +21,10 @@ module Sc
         type == "pages"
       end
       
+      def partial?
+        ::File.basename(@source_file)[0] == ?_
+      end
+      
       def relative_basename
         @source_file[/^\w+\/(.*)\.\w+$/, 1]
       end
@@ -60,13 +64,14 @@ module Sc
       # Compile files
       Dir["{pages,javascripts,stylesheets}/**/*.*"].each do |path|
         file = File.new(path)
-        
-        puts "Compiling #{file.source_file} => #{file.destination_file}"
-        
-        content = site.render(file.template)
-        
-        FileUtils.mkdir_p file.dirname
-        ::File.open(file.destination_file, "w") { |f| f << content }
+        unless file.partial?
+          puts "Compiling #{file.source_file} => #{file.destination_file}"
+          
+          content = site.render(file.template)
+          
+          FileUtils.mkdir_p file.dirname
+          ::File.open(file.destination_file, "w") { |f| f << content }
+        end
       end
       
       # Copy static files
