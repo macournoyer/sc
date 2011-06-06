@@ -1,6 +1,11 @@
 $:.unshift "../lib"
 require "sc"
 
-task :build do
-  Sc.build
+task :compile do
+  Sc.compile
+end
+task :default => :compile
+
+task :clean do
+  rm_rf "build"
 end

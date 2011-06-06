@@ -1,5 +1,13 @@
-@import "compass";
+@import "blueprint/reset";
+@import "config";
+@import "blueprint";
+@import "blueprint/scaffolding";
 
-body {
-  font: 100% Georgia, sans-serif;
+@include blueprint;
+@include blueprint-scaffolding;
+
+.content {
+  @include container;
+  
+  padding: 30px;
 }

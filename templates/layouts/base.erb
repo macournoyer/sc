@@ -1,5 +1,5 @@
-<!doctype html>  
-
+<%# Base layout wrapped arround each layout %>
+<!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ --> 
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -38,10 +38,9 @@
     <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
   <![endif]-->
   
-  <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
-       change the UA-XXXXX-X to be your site's ID -->
+  <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet -->
   <script>
-    var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+    var _gaq = [['_setAccount', '<%= google_analytics_account_id %>'], ['_trackPageview']];
     (function(d, t) {
       var g = d.createElement(t),
           s = d.getElementsByTagName(t)[0];
