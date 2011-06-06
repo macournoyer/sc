@@ -73,6 +73,7 @@ module Sc
       Dir["public/**/*.*"].each do |file|
         dest = file.gsub(/^public/, "build")
         puts "Copying #{file} => #{dest}"
+        FileUtils.mkdir_p ::File.dirname(dest)
         FileUtils.cp file, dest
       end
     end
