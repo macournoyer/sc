@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
+require "fileutils"
 
-name = ARGV.first || raise("usage: sc NAME")
+name = ARGV.first || abort("usage: sc NAME")
 
 FileUtils.mkdir_p name
-FileUtils.cp_r File.dirname(__FILE__) + "/../template/*", name
+FileUtils.cp_r Dir[File.dirname(__FILE__) + "/../template/*"], name
 
 puts <<-USAGE
 ## Now what? ##

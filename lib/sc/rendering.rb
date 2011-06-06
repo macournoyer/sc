@@ -18,6 +18,9 @@ module Sc
     def render_page(path)
       path = "index" if path == "/"
       template = find_template("pages/#{path}")
+      
+      return nil unless template
+      
       context = RenderingContext.new
       content = template.render(context)
       

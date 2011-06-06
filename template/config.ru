@@ -1,4 +1,4 @@
 # usage: rackup
 require "sc"
 
-run Sc
+run Rack::Cascade.new([Rack::File.new("public"), Sc])
