@@ -38,6 +38,7 @@ module Sc
     
     def reload!
       @pages = @assets = @compilable_files = nil
+      reload_helpers
     end
     
     def pages
@@ -78,8 +79,12 @@ module Sc
       end
     
     private
+      def reload_helpers
+        load "./site/helpers.rb"
+      end
+      
       def load_helpers
-        require "./site/helpers"
+        reload_helpers
         RenderingContext.send :include, ::Helpers
       end
       
