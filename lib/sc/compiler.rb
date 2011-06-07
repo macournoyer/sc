@@ -6,7 +6,7 @@ module Sc
       def initialize(source_file)
         @source_file = source_file
         
-        @type = @source_file[/^(\w+)\//, 1]
+        @type = @source_file[/^site\/(?:assets\/)?(\w+)\//, 1]
       end
       
       def ext
@@ -26,7 +26,7 @@ module Sc
       end
       
       def relative_basename
-        @source_file[/^\w+\/(.*)\.\w+$/, 1]
+        @source_file[/^site\/(?:assets\/)?\w+\/(.*)\.\w+$/, 1]
       end
       
       def relative_filename
@@ -62,15 +62,15 @@ module Sc
       FileUtils.mkdir_p "build"
       
       # Compile files
-      Dir["{pages,javascripts,stylesheets}/**/*.*"].each do |path|
+      Dir["site/{pages,assets/*}/**/*.*"].each do |path|
         file = File.new(path)
         unless file.partial?
           puts "Compiling #{file.source_file} => #{file.destination_file}"
           
           content = site.render(file.template)
           
-          FileUtils.mkdir_p file.dirname
-          ::File.open(file.destination_file, "w") { |f| f << content }
+          # FileUtils.mkdir_p file.dirname
+          # ::File.open(file.destination_file, "w") { |f| f << content }
         end
       end
       

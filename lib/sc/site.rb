@@ -19,14 +19,14 @@ module Sc
     
     private
       def load_helpers
-        require "./helpers"
+        require "./site/helpers"
         RenderingContext.send :include, ::Helpers
       end
       
       def load_compass
         Compass.configuration do |config|
           config.project_path = File.dirname(__FILE__)
-          config.sass_dir = 'stylesheets'
+          config.sass_dir = 'site/assets/stylesheets'
         end
       end
       

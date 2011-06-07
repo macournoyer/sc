@@ -10,7 +10,7 @@ module Sc
     end
     
     def render_asset(path)
-      if template = find_template(path)
+      if template = find_template("assets/#{path}")
         template.render
       end
     end
@@ -37,7 +37,7 @@ module Sc
     
     private
       def find_template(path)
-        path = path.gsub(/\.\w+/, "") # normalize
+        path = "site/" + path.gsub(/\.\w+/, "") # normalize
         ext = Tilt.mappings.keys
         if file = Dir["./#{path}.{#{ext*','}}"].first
           Tilt.new(file)
