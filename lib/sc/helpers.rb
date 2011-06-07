@@ -32,10 +32,14 @@ module Sc
     # Filter +block+ w/ a give template +engine+.
     # Eg.:
     #   <% filter :haml do %>
-    #   %h2 Nice
+    #     %h2 Nice
     #   <% end %>
     def filter(engine, &block)
-      output_buffer(block.binding) << Tilt[engine].new { capture(&block) }.render(self)
+      content = capture(&block)
+      # Remove indent
+      indent = content[/\n( *)/, 1]
+      content.gsub!(/\n#{indent}/m, "\n")
+      output_buffer(block.binding) << Tilt[engine].new { content }.render(self)
     end
     
     # Filter +block+ w/ markdown engine.
@@ -72,7 +76,7 @@ module Sc
       end
       
       def tag_options(options)
-        options.map { |k, v| "#{k}=#{v}" }.join(" ")
+        options.map { |k, v| %Q{#{k}="#{v}"} }.join(" ")
       end
   end
 end
