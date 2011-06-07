@@ -1,6 +1,7 @@
 require 'tilt'
 require 'compass'
 
+require "sc/helpers"
 require "sc/rendering"
 require "sc/templates"
 require "sc/site"

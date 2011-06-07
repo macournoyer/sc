@@ -22,14 +22,14 @@ module Sc
       return nil unless template
       
       context = RenderingContext.new
-      content = template.render(context)
+      content = context.render_template(template)
       
       if layout_template = find_template("layouts/#{context.layout}")
-        content = layout_template.render(context) { content }
+        content = context.render_template(layout_template) { content }
       end
       
       if base_layout = find_template("layouts/base")
-        content = base_layout.render(context) { content }
+        content = context.render_template(base_layout) { content }
       end
       
       content
@@ -46,17 +46,19 @@ module Sc
   end
   
   class RenderingContext
+    include Helpers
+    
     def initialize
       @layout = "default"
+      @content_for = {}
     end
     
-    def layout(name=nil)
-      @layout = name if name
-      @layout
-    end
-    
-    def render(template, locals={})
-      Tilt.new("partials/#{template}").render(self, locals)
+    def render_template(template, locals={}, &block)
+      @template = template
+      @content_for[:layout] = block.call if block
+      @template.render(self, locals) { |*names| @content_for[names.first || :layout] }
+    ensure
+      @template = nil
     end
   end
 end
