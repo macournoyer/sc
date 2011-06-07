@@ -1,11 +1,12 @@
 require 'tilt'
 require 'compass'
 
+require "sc/templates"
 require "sc/helpers"
 require "sc/rendering"
-require "sc/templates"
+require "sc/page"
+require "sc/asset"
 require "sc/site"
-require "sc/compiler"
 
 module Sc
   def self.site
@@ -13,7 +14,7 @@ module Sc
   end
   
   def self.compile
-    Compiler.new.compile(site)
+    site.compile
   end
   
   def self.call(env)

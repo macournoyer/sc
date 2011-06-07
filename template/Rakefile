@@ -15,6 +15,6 @@ desc "Deploy the site"
 task :deploy => :compile do
   login = "login"
   address = "mysite.com"
-  path = "." # On remove server
+  path = "." # On remote server
   sh "rsync -va build/ #{login}@#{address}:#{path}/"
 end
