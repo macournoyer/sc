@@ -21,7 +21,7 @@ module Sc
         unless file.partial?
           puts "Compiling #{file.source_filename} => #{file.compiled_filename}"
           
-          content = site.render
+          content = file.render
           
           FileUtils.mkdir_p ::File.dirname(file.compiled_filename)
           ::File.open(file.compiled_filename, "w") { |f| f << content }
