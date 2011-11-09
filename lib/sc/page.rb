@@ -34,7 +34,7 @@ module Sc
     end
     
     def index?
-      name =~ /(^|\/)index$/
+      name =~ /(^|\/)index(\.\w+)?$/
     end
     
     def compiled_filename
