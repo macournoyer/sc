@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   
-  s.add_dependency 'tilt',    '>= 1.3.2'
-  s.add_dependency 'compass', '>= 0.11.1'
+  s.add_dependency 'tilt',    '= 1.3.2'
+  s.add_dependency 'compass', '= 0.11.1'
   s.add_dependency 'rack',    '>= 1.2.3'
 end
